@@ -22,7 +22,7 @@ const DashboardLayout = async ({ children, params: { storeId } }: Props) => {
 		columns: { id: true, name: true }
 	})
 
-	if (!data) redirect('/')
+	if (data) redirect(`/${data.id}`)
 
 	return (
 		<>
