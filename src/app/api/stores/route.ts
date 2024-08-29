@@ -14,10 +14,13 @@ export const POST = async (req: Request) => {
 
 		if (!name) return new NextResponse('Name is required', { status: 400 })
 
-		const data = await db.insert(store).values({
-			name,
-			userId
-		})
+		const [data] = await db
+			.insert(store)
+			.values({
+				name,
+				userId
+			})
+			.returning({ id: store.id, name: store.name })
 
 		return NextResponse.json(data, { status: 201 })
 	} catch (error: any) {
