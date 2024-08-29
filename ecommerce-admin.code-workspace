@@ -5,6 +5,15 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["ecommerce", "hookform", "nextjs", "trpc", "zustand"]
+		"cSpell.words": [
+			"clsx",
+			"ecommerce",
+			"hookform",
+			"lucide",
+			"nextjs",
+			"tailwindcss",
+			"trpc",
+			"zustand"
+		]
 	}
 }
