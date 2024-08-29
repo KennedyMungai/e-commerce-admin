@@ -1,5 +1,6 @@
-import { auth } from '@clerk/nextjs/server'
-import { redirect } from 'next/navigation'
+import { db } from '@/db'
+import { store } from '@/db/schema'
+import { eq } from 'drizzle-orm'
 
 type Props = {
 	params: {
@@ -7,12 +8,12 @@ type Props = {
 	}
 }
 
-const DashboardPage = ({ params: { storeId } }: Props) => {
-	const { userId } = auth()
+const DashboardPage = async ({ params: { storeId } }: Props) => {
+	const data = await db.query.store.findFirst({
+		where: eq(store.id, storeId)
+	})
 
-	if (!userId) redirect('/sign-in')
-
-	return <div>StorePage</div>
+	return <div>Active Store: {data?.name}</div>
 }
 
 export default DashboardPage
