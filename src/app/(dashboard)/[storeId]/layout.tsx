@@ -1,3 +1,4 @@
+import NavBar from '@/components/nav-bar'
 import { db } from '@/db'
 import { store } from '@/db/schema'
 import { auth } from '@clerk/nextjs/server'
@@ -26,7 +27,7 @@ const DashboardLayout = async ({ children, params: { storeId } }: Props) => {
 
 	return (
 		<>
-			<div>This will be a navbar</div>
+			<NavBar />
 			<div>{children}</div>
 		</>
 	)
