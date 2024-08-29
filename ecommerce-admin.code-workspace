@@ -5,6 +5,6 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["ecommerce", "nextjs", "trpc"]
+		"cSpell.words": ["ecommerce", "nextjs", "trpc", "zustand"]
 	}
 }
