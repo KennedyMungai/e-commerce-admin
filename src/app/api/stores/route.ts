@@ -19,7 +19,7 @@ export const POST = async (req: Request) => {
 			userId
 		})
 
-		return NextResponse.json(data)
+		return NextResponse.json(data, { status: 201 })
 	} catch (error: any) {
 		console.log('[STORE_POST]', error.message)
 

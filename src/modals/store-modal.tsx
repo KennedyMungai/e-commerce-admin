@@ -13,8 +13,11 @@ import {
 import { Input } from '@/components/ui/input'
 import { useStoreModal } from '@/hooks/use-store-modal'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import axios from 'axios'
+import { toast } from 'sonner'
 
 const formSchema = z.object({
 	name: z.string().min(1, 'The name is a required property')
@@ -22,6 +25,8 @@ const formSchema = z.object({
 
 const StoreModal = () => {
 	const { isOpen, onClose } = useStoreModal()
+
+	const [loading, setLoading] = useState(false)
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -31,9 +36,20 @@ const StoreModal = () => {
 	})
 
 	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		console.log(values)
+		setLoading(true)
 
-		form.reset()
+		try {
+			const response = axios.post('/api/stores', values).then((res) => {
+				if (res.status === 201)
+					toast.success('Store created successfully')
+			})
+		} catch (error) {
+			toast.error('Something went wrong')
+		} finally {
+			form.reset()
+
+			setLoading(false)
+		}
 	}
 
 	return (
@@ -56,6 +72,7 @@ const StoreModal = () => {
 										<FormControl>
 											<Input
 												{...field}
+												disabled={loading}
 												placeholder='e.g. Clothes Store'
 											/>
 										</FormControl>
@@ -64,10 +81,16 @@ const StoreModal = () => {
 								)}
 							/>
 							<div className='pt-6 space-x-2 flex items-center justify-end w-full'>
-								<Button variant={'outline'} onClick={onClose}>
+								<Button
+									variant={'outline'}
+									onClick={onClose}
+									disabled={loading}
+								>
 									Cancel
 								</Button>
-								<Button type='submit'>Continue</Button>
+								<Button type='submit' disabled={loading}>
+									Continue
+								</Button>
 							</div>
 						</form>
 					</Form>
