@@ -5,6 +5,6 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["ecommerce", "nextjs", "trpc", "zustand"]
+		"cSpell.words": ["ecommerce", "hookform", "nextjs", "trpc", "zustand"]
 	}
 }
