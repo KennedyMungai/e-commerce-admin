@@ -12,17 +12,19 @@ type Props = {
 	}
 }
 
-const DashboardLayout = async ({ children, params: { storeId } }: Props) => {
+const DashboardLayout = ({ children, params: { storeId } }: Props) => {
 	const { userId } = auth()
 
 	if (!userId) redirect('/sign-in')
 
-	const data = await db.query.store.findFirst({
-		where: and(eq(store.id, storeId), eq(store.userId, userId)),
+	const data = db.query.store.findFirst({
+		where: eq(store.id, storeId),
 		columns: { id: true, name: true }
 	})
 
-	if (data) redirect(`/${data.id}`)
+	const id = data.then((data) => data?.id)
+
+	if (id) redirect(`/${id}`)
 
 	return (
 		<>

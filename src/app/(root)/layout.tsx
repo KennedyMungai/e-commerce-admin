@@ -9,12 +9,12 @@ type Props = {
 	children: ReactNode
 }
 
-const SetupLayout = async ({ children }: Props) => {
+const SetupLayout = ({ children }: Props) => {
 	const { userId } = auth()
 
 	if (!userId) redirect('/sign-in')
 
-	const data = await db.query.store.findFirst({
+	const data = db.query.store.findFirst({
 		where: eq(store.id, userId),
 		columns: { id: true, name: true }
 	})
