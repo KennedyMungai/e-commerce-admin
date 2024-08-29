@@ -30,7 +30,11 @@ const StoreModal = () => {
 		}
 	})
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => console.log(values)
+	const onSubmit = (values: z.infer<typeof formSchema>) => {
+		console.log(values)
+
+		form.reset()
+	}
 
 	return (
 		<Modal
