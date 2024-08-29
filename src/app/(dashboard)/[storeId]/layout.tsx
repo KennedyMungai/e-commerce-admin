@@ -1,6 +1,6 @@
 import NavBar from '@/components/nav-bar'
 import { db } from '@/db'
-import { store } from '@/db/schema'
+import { Store } from '@/db/schema'
 import { auth } from '@clerk/nextjs/server'
 import { and, eq } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
@@ -18,8 +18,8 @@ const DashboardLayout = async ({ children, params: { storeId } }: Props) => {
 
 	if (!userId) redirect('/sign-in')
 
-	const data = await db.query.store.findFirst({
-		where: eq(store.id, storeId),
+	const data = await db.query.Store.findFirst({
+		where: eq(Store.id, storeId),
 		columns: { id: true, name: true }
 	})
 

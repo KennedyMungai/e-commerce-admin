@@ -1,5 +1,5 @@
 import { db } from '@/db'
-import { store } from '@/db/schema'
+import { Store } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 
 type Props = {
@@ -9,8 +9,8 @@ type Props = {
 }
 
 const DashboardPage = async ({ params: { storeId } }: Props) => {
-	const data = await db.query.store.findFirst({
-		where: eq(store.id, storeId)
+	const data = await db.query.Store.findFirst({
+		where: eq(Store.id, storeId)
 	})
 
 	return <div>Active Store: {data?.name}</div>

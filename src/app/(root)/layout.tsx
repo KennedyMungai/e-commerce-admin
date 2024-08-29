@@ -1,5 +1,5 @@
 import { db } from '@/db'
-import { store } from '@/db/schema'
+import { Store } from '@/db/schema'
 import { auth } from '@clerk/nextjs/server'
 import { eq } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
@@ -14,8 +14,8 @@ const SetupLayout = async ({ children }: Props) => {
 
 	if (!userId) redirect('/sign-in')
 
-	const data = await db.query.store.findFirst({
-		where: eq(store.userId, userId),
+	const data = await db.query.Store.findFirst({
+		where: eq(Store.userId, userId),
 		columns: { id: true, name: true }
 	})
 

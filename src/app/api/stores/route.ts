@@ -1,5 +1,5 @@
 import { db } from '@/db'
-import { store } from '@/db/schema'
+import { Store } from '@/db/schema'
 import { auth } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
@@ -15,12 +15,12 @@ export const POST = async (req: Request) => {
 		if (!name) return new NextResponse('Name is required', { status: 400 })
 
 		const [data] = await db
-			.insert(store)
+			.insert(Store)
 			.values({
 				name,
 				userId
 			})
-			.returning({ id: store.id, name: store.name })
+			.returning({ id: Store.id, name: Store.name })
 
 		return NextResponse.json(data, { status: 201 })
 	} catch (error: any) {
