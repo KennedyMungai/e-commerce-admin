@@ -21,7 +21,7 @@ const SetupLayout = ({ children }: Props) => {
 
 	if (!data) redirect('/')
 
-	return <div>RootLayout</div>
+	return <>{children}</>
 }
 
 export default SetupLayout
