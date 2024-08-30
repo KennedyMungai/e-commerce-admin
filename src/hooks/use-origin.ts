@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-const useOrigin = () => {
+export const useOrigin = () => {
 	const [isMounted, setIsMounted] = useState(false)
 
 	useEffect(() => setIsMounted(true), [])

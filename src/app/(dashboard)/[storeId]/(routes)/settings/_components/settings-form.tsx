@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { createStoreSchema } from '@/db/schema'
+import { useOrigin } from '@/hooks/use-origin'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { TrashIcon } from 'lucide-react'
@@ -40,6 +41,8 @@ const SettingsForm = ({ initialData }: Props) => {
 
 	const params = useParams()
 	const router = useRouter()
+
+	const origin = useOrigin()
 
 	const { storeId } = params
 
