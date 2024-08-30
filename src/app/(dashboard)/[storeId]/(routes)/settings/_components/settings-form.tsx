@@ -1,6 +1,7 @@
 'use client'
 
 import AlertModal from '@/components/alert-modal'
+import ApiAlert from '@/components/api-alert'
 import Heading from '@/components/heading'
 import { Button } from '@/components/ui/button'
 import {
@@ -138,6 +139,12 @@ const SettingsForm = ({ initialData }: Props) => {
 				onClose={() => setOpen(false)}
 				onConfirm={onDelete}
 				loading={loading}
+			/>
+			<Separator />
+			<ApiAlert
+				title={'Test'}
+				description={'Test Description'}
+				variant={'public'}
 			/>
 		</>
 	)
