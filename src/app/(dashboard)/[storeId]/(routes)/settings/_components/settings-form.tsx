@@ -142,8 +142,8 @@ const SettingsForm = ({ initialData }: Props) => {
 			/>
 			<Separator />
 			<ApiAlert
-				title={'Test'}
-				description={'Test Description'}
+				title={'NEXT_PUBLIC_API_URL'}
+				description={`${origin}/api/stores/${storeId}`}
 				variant={'public'}
 			/>
 		</>
