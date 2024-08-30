@@ -30,3 +30,5 @@ export const BillBoard = pgTable('billboard', {
 export const BillboardRelations = relations(BillBoard, ({ one }) => ({
 	store: one(Store, { fields: [BillBoard.storeId], references: [Store.id] })
 }))
+
+export const createBillBoardSchema = createInsertSchema(BillBoard)
