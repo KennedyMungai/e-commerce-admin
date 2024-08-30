@@ -63,6 +63,26 @@ const SettingsForm = ({ initialData }: Props) => {
 		}
 	}
 
+	const onDelete = async () => {
+		try {
+			setLoading(true)
+
+			await axios.delete(`/api/stores/${storeId}`)
+
+			router.refresh()
+			router.push('/')
+
+			toast.success('Store deleted successfully')
+		} catch (error: any) {
+			toast.error(
+				"Make sure you've removed all products and categories first"
+			)
+		} finally {
+			setLoading(false)
+			setOpen(false)
+		}
+	}
+
 	return (
 		<>
 			<div className='flex items-center justify-between'>
@@ -116,7 +136,7 @@ const SettingsForm = ({ initialData }: Props) => {
 			<AlertModal
 				isOpen={open}
 				onClose={() => setOpen(false)}
-				onConfirm={() => {}}
+				onConfirm={onDelete}
 				loading={loading}
 			/>
 		</>
