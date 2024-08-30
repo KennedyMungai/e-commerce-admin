@@ -1,5 +1,6 @@
 'use client'
 
+import AlertModal from '@/components/alert-modal'
 import Heading from '@/components/heading'
 import { Button } from '@/components/ui/button'
 import {
@@ -73,7 +74,7 @@ const SettingsForm = ({ initialData }: Props) => {
 					variant={'destructive'}
 					disabled={loading}
 					size='icon'
-					onClick={() => {}}
+					onClick={() => setOpen(true)}
 				>
 					<TrashIcon className='size-4 ' />
 				</Button>
@@ -112,6 +113,12 @@ const SettingsForm = ({ initialData }: Props) => {
 					</Button>
 				</form>
 			</Form>
+			<AlertModal
+				isOpen={open}
+				onClose={() => setOpen(false)}
+				onConfirm={() => {}}
+				loading={loading}
+			/>
 		</>
 	)
 }
