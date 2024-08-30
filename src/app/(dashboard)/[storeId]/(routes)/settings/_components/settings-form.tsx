@@ -14,9 +14,12 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { createStoreSchema } from '@/db/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
 import { TrashIcon } from 'lucide-react'
+import { useParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 type Props = {
@@ -33,12 +36,31 @@ const SettingsForm = ({ initialData }: Props) => {
 	const [open, setOpen] = useState(false)
 	const [loading, setLoading] = useState(false)
 
+	const params = useParams()
+	const router = useRouter()
+
+	const { storeId } = params
+
 	const form = useForm<SettingsFormValue>({
 		resolver: zodResolver(formSchema),
 		defaultValues: initialData
 	})
 
-	const onSubmit = (data: SettingsFormValue) => console.log(data)
+	const onSubmit = async (data: SettingsFormValue) => {
+		try {
+			setLoading(true)
+
+			await axios.patch(`/api/stores/${storeId}`, data)
+
+			router.refresh()
+
+			toast.success('Store updated')
+		} catch (error: any) {
+			toast.error(error.message)
+		} finally {
+			setLoading(false)
+		}
+	}
 
 	return (
 		<>
