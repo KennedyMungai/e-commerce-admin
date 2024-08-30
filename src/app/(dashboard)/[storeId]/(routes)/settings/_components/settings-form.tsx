@@ -35,9 +35,7 @@ const SettingsForm = ({ initialData }: Props) => {
 
 	const form = useForm<SettingsFormValue>({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			name: initialData.name
-		}
+		defaultValues: initialData
 	})
 
 	const onSubmit = (data: SettingsFormValue) => console.log(data)
@@ -49,7 +47,12 @@ const SettingsForm = ({ initialData }: Props) => {
 					title='Settings'
 					description='Manage store preferences'
 				/>
-				<Button variant={'destructive'} size='icon' onClick={() => {}}>
+				<Button
+					variant={'destructive'}
+					disabled={loading}
+					size='icon'
+					onClick={() => {}}
+				>
 					<TrashIcon className='size-4 ' />
 				</Button>
 			</div>
@@ -67,39 +70,24 @@ const SettingsForm = ({ initialData }: Props) => {
 								<FormItem>
 									<FormLabel>Name</FormLabel>
 									<FormControl>
-										<Input disabled={loading} {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name='name'
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Name</FormLabel>
-									<FormControl>
-										<Input disabled={loading} {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name='name'
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Name</FormLabel>
-									<FormControl>
-										<Input disabled={loading} {...field} />
+										<Input
+											placeholder='Store Name'
+											disabled={loading}
+											{...field}
+										/>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
 					</div>
+					<Button
+						type='submit'
+						disabled={loading}
+						className='ml-auto'
+					>
+						Save Changes
+					</Button>
 				</form>
 			</Form>
 		</>
