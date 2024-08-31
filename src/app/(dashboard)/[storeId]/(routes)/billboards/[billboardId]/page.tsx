@@ -10,14 +10,20 @@ type Props = {
 }
 
 const BillboardPage = async ({ params: { billboardId } }: Props) => {
-	const billboard = await db.query.BillBoard.findFirst({
-		where: eq(BillBoard.id, billboardId)
-	})
+	let data
+
+	if (billboardId === 'new') {
+		data = null
+	} else {
+		data = await db.query.BillBoard.findFirst({
+			where: eq(BillBoard.id, billboardId)
+		})
+	}
 
 	return (
 		<div className='flex flex-col'>
 			<div className='flex-1 space-y-4 p-8 pt-6'>
-				<BillboardForm initialData={billboard} />
+				<BillboardForm initialData={data} />
 			</div>
 		</div>
 	)
