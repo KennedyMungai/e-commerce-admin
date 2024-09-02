@@ -35,7 +35,7 @@ const ImageUpload = ({ onChange, onRemove, disabled, value }: Props) => {
 						<div className='z-10 absolute top-2 right-2'>
 							<Button
 								variant={'ghost'}
-								className='text-red-500'
+								className='text-rv ed-500'
 								onClick={() => onRemove(url)}
 								size='icon'
 								type='button'

@@ -2,6 +2,7 @@
 
 import AlertModal from '@/components/alert-modal'
 import Heading from '@/components/heading'
+import ImageUpload from '@/components/image-upload'
 import { Button } from '@/components/ui/button'
 import {
 	Form,
@@ -63,7 +64,7 @@ const BillboardForm = ({ initialData }: Props) => {
 		try {
 			setLoading(true)
 
-			await axios.patch(`/api/stores/${storeId}`, data)
+			await axios.post(`/api/stores/${storeId}/billboards`, data)
 
 			router.refresh()
 
@@ -116,6 +117,24 @@ const BillboardForm = ({ initialData }: Props) => {
 					onSubmit={form.handleSubmit(onSubmit)}
 					className='space-y-8 w-full'
 				>
+					<FormField
+						control={form.control}
+						name='imageUrl'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Background Image</FormLabel>
+								<FormControl>
+									<ImageUpload
+										onChange={(url) => field.onChange(url)}
+										onRemove={() => field.onChange('')}
+										value={field.value ? [field.value] : []}
+										disabled={loading}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 					<div className='grid grid-cols-3 gap-8'>
 						<FormField
 							control={form.control}
