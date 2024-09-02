@@ -64,6 +64,7 @@ const ImageUpload = ({ onChange, onRemove, disabled, value }: Props) => {
 							onClick={onClick}
 						>
 							<ImagePlus className='size-4 mr-2' />
+							Upload an image
 						</Button>
 					)
 				}}
